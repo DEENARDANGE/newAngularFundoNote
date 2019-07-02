@@ -1,6 +1,6 @@
 export interface Collaborator {
-    collEmailID: string;
-    id: number;
+    collID: number;
+    allocatedId: number;
     noteId: number;
     ownerId: number;
 

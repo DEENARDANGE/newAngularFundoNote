@@ -7,16 +7,16 @@ import { HttpHeaders } from '@angular/common/http';
 })
 
 export class LabelService {
-  public API = '//localhost:8080';
+  public API = '//localhost:8080/user';
   constructor(private http: HttputilService) { }
 
   public getLabels() {
-    var header = this.getHeader();
-    return this.http.get(this.API + '/retrievelabel', header);
+    const header = this.getHeader();
+    return this.http.get(this.API + '/get-label', header);
   }
 
   public getHeader() {
-    var token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const httpheaders = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -27,8 +27,8 @@ export class LabelService {
   }
 
   public deleteLabel(label) {
-    var token = localStorage.getItem('token');
-    var labelName = label.labelName;
+    const token = localStorage.getItem('token');
+    const labelName = label.labelName;
     return this.http.deleteWithParams(this.API + '/deletelabel/' + token, {
       params: {
         labelName: labelName
@@ -37,25 +37,25 @@ export class LabelService {
   }
 
   public updateLabel(label) {
-    var header = this.getHeader();
-    return this.http.put(this.API + '/editlabel', label, header);
+    const header = this.getHeader();
+    return this.http.put(this.API + '/updatelabel', label, header);
   }
 
   public createLabel(label){
-    var header = this.getHeader();
+    const header = this.getHeader();
     return this.http.postWithBody(this.API + '/createlabel', label, header);
   }
 
-  public mapLabelTONote({id: labelId},{id: noteId}){
+  public mapLabelTONote({id: labelId}, {id: noteId}){
     const header = this.getHeader();
     const url = `${this.API}/map-note-label/${noteId}/${labelId}`;
-    return this.http.put(url,{}, header);
+    return this.http.put(url, {}, header);
   }
 
-  public removeLabelNote(label,note){
-    var noteId= note.id;
-    var labelId=label.id;
-    var header = this.getHeader();
-    return this.http.delete(this.API + '/removenote&label/'+noteId+'/'+labelId, header);
+  public removeLabelNote(label, note){
+    const noteId = note.id;
+    const labelId = label.id;
+    const header = this.getHeader();
+    return this.http.delete(this.API + '/removenote&label/' + noteId + '/' + labelId, header);
   }
 }

@@ -6,13 +6,14 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  constructor(private jwtHelper:JwtHelperService) { }
+  constructor(private jwtHelper: JwtHelperService) { }
 
   public isAuthenticated(): boolean {
-    const token = localStorage.getItem("token");
-    if(!token)
-    return false
-    else
+    const token = localStorage.getItem('token');
+    if (!token) {
+    return false;
+    } else {
     return true;
+    }
   }
 }

@@ -8,6 +8,7 @@ import { HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
+  set: any;
 
   constructor(private httpUtil: HttputilService) { }
 
@@ -22,13 +23,18 @@ export class UserService {
     return httpheaders;
   }
 
-  public login(user) {
+  public login(user):Observable<any>{
     return this.httpUtil.post(environment.base_url + '/login', user);
   }
 
   public register(user) {
    return this.httpUtil.post(environment.base_url + '/registration', user);
 
+  }
+  public active(){
+    const token=localStorage.getItem('token');
+    const header = this.getHeader();
+    return this.httpUtil.get(environment.base_url + '/active/' + token, header );
   }
 
   public forgotPassword(user): Observable<any> {
@@ -41,11 +47,11 @@ export class UserService {
 
   public getUser(): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.httpUtil.get(environment.base_url + '/users/' + token, {});
+    return this.httpUtil.get(environment.base_url + '/get-user', {});
   }
 
   public updateUser(user) {
-    return this.httpUtil.post(environment.base_url + '/user', user);
+    return this.httpUtil.post(environment.base_url + '/update-user', user);
   }
 
   public getCollUser() {

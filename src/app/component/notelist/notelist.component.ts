@@ -51,11 +51,11 @@ export class NotelistComponent implements OnInit {
   panelOpenState: boolean = false;
   submitted = false;
 
-  constructor(private httpUtil: HttputilService, private router: Router, private labelService: LabelService, private noteService: NoteService,
-    public dialog: MatDialog, private snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<NotelistComponent>,
-    @Inject(MAT_DIALOG_DATA) public data, private userService: UserService,
-    private sanitizer: DomSanitizer, private dataService: DataServiceService) { }
+  constructor(private router: Router, private labelService: LabelService, private noteService: NoteService,
+              public dialog: MatDialog, private snackBar: MatSnackBar,
+              public dialogRef: MatDialogRef<NotelistComponent>,
+              @Inject(MAT_DIALOG_DATA) public data, private userService: UserService,
+              private sanitizer: DomSanitizer, private dataService: DataServiceService) { }
 
   public ngOnInit() {
     this.readAll();

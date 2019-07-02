@@ -36,6 +36,7 @@ import { HoverDirective } from './hover.directive';
 import { TrailComponent } from './trail/trail.component';
 import { RemainderComponentComponent } from './component/remainder-component/remainder-component.component';
 import { NoteSearchComponent } from './component/note-search/note-search.component';
+import { ActivestatusComponent } from './component/user-components/activestatus/activestatus.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -69,6 +70,7 @@ export function tokenGetter() {
     HoverDirective,
     TrailComponent,
     RemainderComponentComponent,
+    ActivestatusComponent,
   ],
 
   imports: [

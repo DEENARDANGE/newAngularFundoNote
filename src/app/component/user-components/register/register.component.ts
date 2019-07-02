@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
     submitted = false;
 
     constructor(private formBuilder: FormBuilder,
-        private router: Router, private Userservice: UserService, private snackBar: MatSnackBar) { }
+                private router: Router, private Userservice: UserService, private snackBar: MatSnackBar) { }
 
     public ngOnInit() {
 
@@ -38,10 +38,12 @@ export class RegisterComponent implements OnInit {
             this.snackBar.open('successfully registered', 'Ok', {
                 duration: 2000,
             });
+            this.router.navigate(['/login']);
         }, (error) => {
             this.snackBar.open('successfully registered', 'Ok', {
                 duration: 2000,
             });
+
             console.log(error);
         });
     }

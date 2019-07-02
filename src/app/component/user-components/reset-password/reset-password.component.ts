@@ -49,7 +49,7 @@ export class ResetPasswordComponent implements OnInit {
     var tokenObject = {};
     if(password == repeatPassword){
       this.activatedRoute.params.subscribe((params: Params) => {
-        var token = params['token'];
+        const token = params['token'];
         console.log(token);
         tokenObject = {
           "token":token,

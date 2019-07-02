@@ -39,16 +39,17 @@ export class LoginComponent implements OnInit {
         this.Userservice.login(user).subscribe(response => {
             console.log(response);
             localStorage.setItem('token', response.headers.get('token'));
+            this.router.navigate(['/home']);
 
-            var localToken= localStorage.getItem('token');
-            if (localToken != null) { 
-                this.router.navigate(['/home']);
-            }else {
+            // const localToken = localStorage.getItem('token');
+            // if (localToken != null) { 
+            //     this.router.navigate(['/home']);
+            // }else {
 
-                localStorage.removeItem('token');
-                this.router.navigate(['/login']);
+            //     localStorage.removeItem('token');
+            //     this.router.navigate(['/login']);
 
-            }
+            // }
             
           }, (error) => {
             this.snackBar.open('invalid user details', 'Ok', {

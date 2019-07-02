@@ -10,58 +10,57 @@ import { Token } from '@angular/compiler';
 export class NoteService {
 
   notes = [];
-  titl: null
-  discriptio: null
-  public API = '//localhost:8080';
+  titl: null;
+  discriptio: null;
+  public API = '//localhost:8080/user';
   constructor(private httpUtil: HttputilService) {
   }
 
   public getHeader() {
-    var token = localStorage.getItem('token')
+    const token = localStorage.getItem('token');
     const httpheaders = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'token': token
+        token: token
       })
     };
     return httpheaders;
   }
 
   public getAll(): Observable<any> {
-    var header = this.getHeader();
-    return this.httpUtil.get(this.API + '/notes', header)
+    const header = this.getHeader();
+    return this.httpUtil.get(this.API + '/get-notes', header);
 
   }
 
-  public save(note) {
-    var token = localStorage.getItem('token'); 
-    var header = this.getHeader();
-    return this.httpUtil.postWithBody(this.API + '/note/' + token, note, header)
+  public save(note): Observable<any> {
+    const token = localStorage.getItem('token');
+    const header = this.getHeader();
+    return this.httpUtil.postWithBody(this.API + '/create-note' + token , note, header);
   }
 
   public delete(id) {
-    var header = this.getHeader();
-    return this.httpUtil.delete(this.API + '/note/' + id, header);
+    const header = this.getHeader();
+    return this.httpUtil.delete(this.API + '/delete-note/' + id, header);
   }
 
   public updateNote(note, noteId) {
     var token = localStorage.getItem('token');
-    return this.httpUtil.put(this.API + '/note', note, {
+    return this.httpUtil.put(this.API + '/update-note/' + token, note, {
       params: {
         noteId: noteId,
         token: token
       }, observe: 'response'
     })
   }
-
   public doCollab(collabUser) {
-    var token = localStorage.getItem('token');
-    return this.httpUtil.put(this.API + '/add-collabarator/' + token, collabUser, {})
+    const token = localStorage.getItem('token');
+    return this.httpUtil.put(this.API + '/add-collabarator/' + token, collabUser, {});
   }
 
   public removeCollab(collabUser) {
-    var token = localStorage.getItem('token');
-    return this.httpUtil.put(this.API + '/remove-collabarator/' + token, collabUser, {})
+    const token = localStorage.getItem('token');
+    return this.httpUtil.put(this.API + '/remove-collabarator/' + token, collabUser, {});
   }
 
   public uploadNoteImage(fd, noteId) {
